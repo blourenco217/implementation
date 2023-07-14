@@ -39,6 +39,7 @@ except ImportError:
 # ==============================================================================
 # -- Find CARLA module ---------------------------------------------------------
 # ==============================================================================
+sys.path.append('../carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')  # @changed
 try:
     sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
@@ -51,7 +52,6 @@ except IndexError:
 # -- Add PythonAPI for release mode --------------------------------------------
 # ==============================================================================
 
-sys.path.append('../carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')
 try:
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/carla')
 except IndexError:
@@ -679,7 +679,9 @@ def game_loop(args):
 
     try:
         client = carla.Client(args.host, args.port)
-        client.set_timeout(4.0)
+        client.set_timeout(8.0)
+        client.load_world('Town04')
+        client.reload_world()
 
         display = pygame.display.set_mode(
             (args.width, args.height),
