@@ -149,7 +149,9 @@ class World(object):
                 print('Please add some Vehicle Spawn Point to your UE4 scene.')
                 sys.exit(1)
             spawn_points = self.map.get_spawn_points()
+            print("Spawn points: ", spawn_points)
             spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
+            print("Spawn point: ", spawn_point)
             self.player = self.world.try_spawn_actor(blueprint, spawn_point)
         # Set up the sensors.
         self.collision_sensor = CollisionSensor(self.player, self.hud)
