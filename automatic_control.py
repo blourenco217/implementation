@@ -152,9 +152,14 @@ class World(object):
             # print("Spawn points: ", spawn_points)
             spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
             print("Spawn point: ", spawn_point)
+
+            # @changed
             spawn_point.location.x = -483.0
             spawn_point.location.y = 240
             spawn_point.location.z = 0.3
+            spawn_point.rotation.roll = 0.0
+            spawn_point.rotation.pitch = 0.0
+            spawn_point.rotation.yaw = -90.0
 
             self.player = self.world.try_spawn_actor(blueprint, spawn_point)
         # Set up the sensors.
