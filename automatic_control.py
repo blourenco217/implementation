@@ -126,10 +126,12 @@ class World(object):
             random.seed(args.seed)
 
         # Get a random blueprint.
-        blueprint = random.choice(self.world.get_blueprint_library().filter(self._actor_filter))
+        # blueprint = random.choice(self.world.get_blueprint_library().filter(self._actor_filter))
+        blueprint = self.world.get_blueprint_library().find('vehicle.tesla.model3')  # @changed
         blueprint.set_attribute('role_name', 'hero')
         if blueprint.has_attribute('color'):
-            color = random.choice(blueprint.get_attribute('color').recommended_values)
+            # color = random.choice(blueprint.get_attribute('color').recommended_values)
+            color = blueprint.get_attribute('color').recommended_values[0]  # @changed
             blueprint.set_attribute('color', color)
         # Spawn the player.
         print("Spawning the player")
